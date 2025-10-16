@@ -18,6 +18,11 @@ public class Application {
         int sum = 0;
         String separator = "[,:]";
 
+        if (expression.startsWith("//") && expression.contains("\\n")) {
+            separator = "[" + customParseExpression(expression) + "]";
+            expression = expression.substring(expression.indexOf("n")+1);
+        }
+
         String[] tokens = expression.split(separator);
 
         for (String token : tokens) {
@@ -25,5 +30,12 @@ public class Application {
         }
 
         return sum;
+    }
+
+    public static String customParseExpression(String expression) {
+        int start = expression.indexOf("//");
+        int end = expression.indexOf("\\n");
+
+        return expression.substring(start+2, end);
     }
 }

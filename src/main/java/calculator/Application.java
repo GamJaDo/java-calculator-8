@@ -26,6 +26,7 @@ public class Application {
         String[] tokens = expression.split(separator);
 
         for (String token : tokens) {
+            validateToken(token);
             sum += Integer.parseInt(token);
         }
 
@@ -37,5 +38,15 @@ public class Application {
         int end = expression.indexOf("\\n");
 
         return expression.substring(start+2, end);
+    }
+
+    public static void validateToken(String token) {
+        if (!token.matches("\\d+")) {
+            throw new IllegalArgumentException();
+        }
+
+        if (Integer.parseInt(token) < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }
